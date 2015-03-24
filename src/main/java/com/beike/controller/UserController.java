@@ -31,6 +31,25 @@ public class UserController {
 
     private static Logger logger = Logger.getLogger(UserController.class);
     private static UserManager userManager = new UserManager();
+
+    @RequestMapping(value = "/add")
+    public void methodUserAdd(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            @RequestParam(value = "username", required = true) String username,
+            @RequestParam(value = "password", required = true) String password
+    ){
+        logger.info("username:" +username+ "password:" + password);
+        userManager.addUser(new User(username, password));
+        String jsonResult = "{result:true, message:add user success}";
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            response.getWriter().print(jsonResult);
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+    }
+
     @RequestMapping(value = "/list")
     public void methodUserList(
             HttpServletRequest request,

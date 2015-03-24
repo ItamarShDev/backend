@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="com.beike:war exploded">
+    <output-path>$PROJECT_DIR$/target/com.beike-1.0-SNAPSHOT</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="com.beike" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="E:\Project\Intellij\backend\target/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="com.beike/web/Web" />
+    </root>
+  </artifact>
+</component>
