@@ -1,0 +1,27 @@
+<form id="addtaskform" method="post">
+    username:<input name="username">
+    <br>
+    password:<input name="password">
+
+
+</form>
+<input type="button" value="submit" onclick="getData()">
+<script src="js/jquery-2.1.3.js"></script>
+<script>
+    function getData() {
+        var post_data = $("#addtaskform input").map(function() {
+            return ($(this).attr("name")+'='+$(this).val());
+        }).get().join("&");
+        alert(post_data);
+
+        $.ajax(
+        {
+            url:"addtask",
+            data:post_data,
+            method:"post",
+            success:function(data){
+            }
+        }
+    );
+    }
+</script>
