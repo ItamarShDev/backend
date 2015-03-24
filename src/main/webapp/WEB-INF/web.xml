@@ -26,7 +26,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>api</servlet-name>
-        <url-pattern>/user/list</url-pattern>
+        <url-pattern>/user/*</url-pattern>
     </servlet-mapping>
     <filter>
         <filter-name>setCharacterEncoding</filter-name>
