@@ -16,10 +16,11 @@
 
         $.ajax(
         {
-            url:"addtask",
+            url:"/user/login",
             data:post_data,
             method:"post",
             success:function(data){
+                alert("return data:" + data);
             }
         }
     );

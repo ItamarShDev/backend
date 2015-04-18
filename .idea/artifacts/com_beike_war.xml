@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="com.beike:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="com.beike-1.0-SNAPSHOT.war">
-      <element id="artifact" artifact-name="com.beike:war exploded" />
-    </root>
-  </artifact>
-</component>
