@@ -22,12 +22,12 @@
 
     <!-- aaa-->
 
-    <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/**" />-->
-            <!--<bean class="com.free4lab.logserver.interceptor.SignCheckInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <bean class="com.beike.interceptor.UserSessionInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
 </beans>

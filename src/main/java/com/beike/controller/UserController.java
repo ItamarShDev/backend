@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.beike.dao.User;
 import com.beike.manager.UserManager;
+import com.opensymphony.xwork2.ActionContext;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +33,6 @@ public class UserController {
 
     private static Logger logger = Logger.getLogger(UserController.class);
     private static UserManager userManager = new UserManager();
-
     @RequestMapping(value = "/add")
     public void methodUserAdd(
             HttpServletRequest request,
@@ -86,11 +86,14 @@ public class UserController {
             @RequestParam(value = "password", required = false) String password) {
         String jsonResult = "";
         logger.info("login request: username=" + username + "password=" + password);
+        Map<String, Object> session = ActionContext.getContext().getSession();
 
         List<User> users = userManager.getUserByUsernameAndPassword(username, password);
         if (users != null && users.size() > 0) {
             jsonResult = "{result:true, message:login success}";
+            session.put("username", username);
             logger.info("user info:" + users.get(0));
+            logger.info("username in session:" + session.get("username"));
         } else {
             jsonResult = "{result:false, message:login failed}";
         }
