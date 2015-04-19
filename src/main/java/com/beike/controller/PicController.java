@@ -2,7 +2,6 @@ package com.beike.controller;
 
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
-import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import org.apache.log4j.Logger;
@@ -12,15 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
  * Created by huahui.yang on 4/19/15.
  */
 
-@Controller
-@RequestMapping("/pic")
+//@Controller
+//@RequestMapping("/pic")
 public class PicController {
     private static Logger logger = Logger.getLogger(PicController.class);
     private static String ACCESS_KEY = "2M7GJDQg1q-9t3ainZtuZ_IcZIT258vhI_IiwQzY";
@@ -30,7 +28,7 @@ public class PicController {
 //    private BucketManager bucketManager = new BucketManager(auth);
 
 
-    @RequestMapping(value = "/upload")
+//    @RequestMapping(value = "/upload")
     public void methodPicUpload(
             HttpServletRequest request,
             HttpServletResponse response,
