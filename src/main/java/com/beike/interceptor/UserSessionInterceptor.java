@@ -39,7 +39,7 @@ public class UserSessionInterceptor implements HandlerInterceptor {
 
         String username = (String) request.getSession().getAttribute("username");
 
-        logger.info("get username from session: " + username);
+        logger.info("get username from session " + username);
         String result = "";
         String message = "";
         if (username == null || "".equals(username)) {
