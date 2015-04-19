@@ -38,11 +38,17 @@ public class UserController {
             HttpServletRequest request,
             HttpServletResponse response,
             @RequestParam(value = "username", required = true) String username,
-            @RequestParam(value = "password", required = true) String password
-    ) {
+            @RequestParam(value = "password", required = true) String password) {
+        String jsonResult = "";
         logger.info("username:" + username + "password:" + password);
-        userManager.addUser(new User(username, password));
-        String jsonResult = "{result:true, message:add user success}";
+        boolean existUser = userManager.existUser(username);
+        if (existUser) {
+            jsonResult = "{result:false, message:username exists}";
+        } else {
+            userManager.addUser(new User(username, password));
+            jsonResult = "{result:true, message:add user success}";
+        }
+
         try {
             response.setContentType("text/html;charset=UTF-8");
             response.getWriter().print(jsonResult);
@@ -63,7 +69,6 @@ public class UserController {
         for (User at : users) {
             jsonResult += ("{" + at.getUsername() + ":" + at.getPassword() + "}");
         }
-
         try {
             response.setContentType("text/html;charset=UTF-8");
             response.getWriter().print(jsonResult);
@@ -83,11 +88,11 @@ public class UserController {
         logger.info("login request: username=" + username + "password=" + password);
 
         List<User> users = userManager.getUserByUsernameAndPassword(username, password);
-        if(users!=null && users.size() > 0) {
-            jsonResult = "login success";
+        if (users != null && users.size() > 0) {
+            jsonResult = "{result:true, message:login success}";
             logger.info("user info:" + users.get(0));
         } else {
-            jsonResult = "login failed";
+            jsonResult = "{result:false, message:login failed}";
         }
 
         try {
