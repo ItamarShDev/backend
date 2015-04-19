@@ -21,7 +21,9 @@
     </context:component-scan>-->
 
     <!-- aaa-->
-    <mvc:view-controller path="/" view-name="redirect:/user/login" />
+    <!--<mvc:view-controller path="/" view-name="redirect:/user/login" />-->
+
+    <mvc:default-servlet-handler/>
 
     <mvc:interceptors>
         <mvc:interceptor>
