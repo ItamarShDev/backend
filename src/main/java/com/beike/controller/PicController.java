@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.UUID;
 
 /**
  * Created by huahui.yang on 4/19/15.
@@ -28,6 +29,8 @@ public class PicController {
     private Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
     private BucketManager bucketManager = new BucketManager(auth);
 
+    private String preUrl = "http://7xint6.com1.z0.glb.clouddn.com/";
+
 
     @RequestMapping(value = "/upload")
     public void methodPicUpload(
@@ -41,22 +44,15 @@ public class PicController {
 //        UploadManager uploadManager = new UploadManager();
 //        Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
 //        String token = auth.uploadToken(bucketName);
+        UUID uuid = UUID.randomUUID();
+
         try {
-            bucketManager.fetch(picurl, bucketName, "key"+picurl);
+            bucketManager.fetch(picurl, bucketName, uuid.toString());
         } catch (QiniuException e) {
             e.printStackTrace();
         }
-//        Response r = null;
-//        try {
-//            r = uploadManager.put("hello world".getBytes(), "yourkey", token);
-//
-//        } catch (QiniuException e) {
-//            e.printStackTrace();
-//        }
-//
-//        logger.info("response:" + r);
 
-        jsonResult = "{result:true, message:upload success}";
+        jsonResult = "{result:true, message:upload success, cdnlink:\'"+ preUrl+uuid.toString() + "\'}";
 
         try {
             response.setContentType("text/html;charset=UTF-8");
