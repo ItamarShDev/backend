@@ -123,7 +123,7 @@ public class UserController {
             User user = userManager.getUserByUsername(username);
             if (user != null) {
                 jsonResult = "{result:true, userid:" + user.getId() + ", username:" + username +
-                        ", email:" + user.getEmail() + ", message:user in session))}";
+                        ", email:" + user.getEmail() + ", message:user in session}";
             } else {
                 jsonResult = "{result:false, message:please login}";
             }
