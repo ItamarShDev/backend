@@ -33,17 +33,17 @@ public class UserSessionInterceptor implements HandlerInterceptor {
                              Object handler) throws Exception {
 
         String requestUrl = request.getRequestURI();
-        if(uncheckUrls.contains(requestUrl)){
+        if (uncheckUrls.contains(requestUrl)) {
             return true;
         }
 
-        String username = (String)request.getSession().getAttribute("username");
+        String username = (String) request.getSession().getAttribute("username");
 
         logger.info("get username from session: " + username);
-        String result= "";
+        String result = "";
         String message = "";
-        if(username == null || "".equals(username)) {
-            result = "failed";
+        if (username == null || "".equals(username)) {
+            result = "false";
             message = "no username in session:" + username;
             showRejectInfo(response, message, result);
             return false;
@@ -56,7 +56,7 @@ public class UserSessionInterceptor implements HandlerInterceptor {
     //show interceptor info
     private void showRejectInfo(HttpServletResponse response, String message, String result) {
         logger.info(result);
-        String json = "{\"result\":\""+result+"\",\"message\":"+message+"}";
+        String json = "result:+" + result + ", message:" + message + "}";
         try {
             response.setContentType("text/html;charset=UTF-8");
             response.getWriter().print(json);
