@@ -56,7 +56,7 @@ public class UserSessionInterceptor implements HandlerInterceptor {
     //show interceptor info
     private void showRejectInfo(HttpServletResponse response, String message, String result) {
         logger.info(result);
-        String json = "result:" + result + ", message:" + message + "}";
+        String json = "{result:" + result + ", message:" + message + "}";
         try {
             response.setContentType("text/html;charset=UTF-8");
             response.getWriter().print(json);
