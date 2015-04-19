@@ -95,7 +95,7 @@ public class UserController {
             session.setAttribute("username", username);
             request.getSession().getAttribute("username");
             logger.info("user info:" + users.get(0));
-            logger.info("username in session:" + session.getAttribute("username");
+            logger.info("username in session:" + session.getAttribute("username"));
         } else {
             jsonResult = "{result:false, message:login failed}";
         }
