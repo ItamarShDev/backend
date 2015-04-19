@@ -48,7 +48,6 @@ public class UserSessionInterceptor implements HandlerInterceptor {
             showRejectInfo(response, message, result);
             return false;
         } else {
-            showRejectInfo(response, message, result);
             return true;
         }
     }
