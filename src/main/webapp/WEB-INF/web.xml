@@ -26,16 +26,16 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>api</servlet-name>
-        <url-pattern>/user/list</url-pattern>
+        <url-pattern>/**</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>api</servlet-name>
-        <url-pattern>/user/add</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>api</servlet-name>
-        <url-pattern>/user/login</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>api</servlet-name>-->
+        <!--<url-pattern>/user/add</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>api</servlet-name>-->
+        <!--<url-pattern>/user/login</url-pattern>-->
+    <!--</servlet-mapping>-->
     <filter>
         <filter-name>setCharacterEncoding</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
