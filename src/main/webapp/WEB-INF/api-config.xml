@@ -21,10 +21,12 @@
     </context:component-scan>-->
 
     <!-- aaa-->
+    <mvc:view-controller path="/" view-name="redirect:/user/login" />
 
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**" />
+            <mvc:exclude-mapping path="/user/login"/>
             <bean class="com.beike.interceptor.UserSessionInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
