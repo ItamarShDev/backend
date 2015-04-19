@@ -33,4 +33,12 @@ public class UserManager {
             System.out.println("name="+user.getUsername()+",password="+user.getUsername());
         }
     }
+
+    public boolean existUser(String username) {
+        List<User> users = userDAO.findByProperty("username", username);
+        if(users == null || users.size() == 0) {
+            return false;
+        }
+        return true;
+    }
 }
