@@ -48,8 +48,6 @@ public class UserSessionInterceptor implements HandlerInterceptor {
             showRejectInfo(response, message, result);
             return false;
         } else {
-            result = "success";
-            message = "find username in session:" + username;
             showRejectInfo(response, message, result);
             return true;
         }

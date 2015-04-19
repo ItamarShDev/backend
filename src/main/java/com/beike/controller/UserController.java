@@ -34,6 +34,7 @@ public class UserController {
 
     private static Logger logger = Logger.getLogger(UserController.class);
     private static UserManager userManager = new UserManager();
+
     @RequestMapping(value = "/add")
     public void methodUserAdd(
             HttpServletRequest request,
@@ -98,6 +99,34 @@ public class UserController {
             logger.info("username in session:" + session.getAttribute("username"));
         } else {
             jsonResult = "{result:false, message:login failed}";
+        }
+
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            response.getWriter().print(jsonResult);
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+
+    }
+
+    @RequestMapping(value = "/info")
+    public void methodUserInfo(
+            HttpServletRequest request,
+            HttpServletResponse response) {
+        String jsonResult = "";
+        HttpSession session = request.getSession();
+        String username = (String) request.getSession().getAttribute("username");
+        if (username == null || "".equals(username)) {
+            jsonResult = "{result:false, message:please login}";
+        } else {
+            User user = userManager.getUserByUsername(username);
+            if(user != null ) {
+                jsonResult = "{result:true, username:" + username +
+                        ",email:" + user.getEmail() + ",message: user in session))}";
+            } else {
+                jsonResult = "{result:false, message:please login}";
+            }
         }
 
         try {

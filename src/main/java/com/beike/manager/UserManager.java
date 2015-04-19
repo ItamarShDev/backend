@@ -41,4 +41,12 @@ public class UserManager {
         }
         return true;
     }
+
+    public User getUserByUsername(String username) {
+        List<User> users = userDAO.findByProperty("username", username);
+        if(users == null || users.size() == 0) {
+            return null;
+        }
+        return users.get(0);
+    }
 }
