@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,6 +31,11 @@ public class UserSessionInterceptor implements HandlerInterceptor {
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
                              Object handler) throws Exception {
+
+        String requestUrl = request.getRequestURI();
+        if(uncheckUrls.contains(requestUrl)){
+            return true;
+        }
 
         String username = (String)request.getSession().getAttribute("username");
 
@@ -60,4 +66,16 @@ public class UserSessionInterceptor implements HandlerInterceptor {
             logger.error(e.getMessage());
         }
     }
+
+
+    private List<String> uncheckUrls;
+
+    public List<String> getUncheckUrls() {
+        return uncheckUrls;
+    }
+
+    public void setUncheckUrls(List<String> uncheckUrls) {
+        this.uncheckUrls = uncheckUrls;
+    }
+
 }
