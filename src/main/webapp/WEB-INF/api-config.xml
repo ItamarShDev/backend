@@ -27,6 +27,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**" />
+            <mvc:exclude-mapping path="/"/>
             <mvc:exclude-mapping path="/user/login"/>
             <bean class="com.beike.interceptor.UserSessionInterceptor"/>
         </mvc:interceptor>
