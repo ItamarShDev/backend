@@ -30,8 +30,9 @@ public class UserSessionInterceptor implements HandlerInterceptor {
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
                              Object handler) throws Exception {
-        Map<String, Object> session = ActionContext.getContext().getSession();
-        String username = (String)session.get("username");
+
+        String username = (String)request.getSession().getAttribute("username");
+
         logger.info("get username from session: " + username);
         String result= "";
         String message = "";

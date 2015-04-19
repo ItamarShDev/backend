@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.beike.dao.User;
 import com.beike.manager.UserManager;
@@ -86,14 +87,15 @@ public class UserController {
             @RequestParam(value = "password", required = false) String password) {
         String jsonResult = "";
         logger.info("login request: username=" + username + "password=" + password);
-        Map<String, Object> session = ActionContext.getContext().getSession();
+        HttpSession session = request.getSession();
 
         List<User> users = userManager.getUserByUsernameAndPassword(username, password);
         if (users != null && users.size() > 0) {
             jsonResult = "{result:true, message:login success}";
-            session.put("username", username);
+            session.setAttribute("username", username);
+            request.getSession().getAttribute("username");
             logger.info("user info:" + users.get(0));
-            logger.info("username in session:" + session.get("username"));
+            logger.info("username in session:" + session.getAttribute("username");
         } else {
             jsonResult = "{result:false, message:login failed}";
         }
