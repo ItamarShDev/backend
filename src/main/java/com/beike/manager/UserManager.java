@@ -23,6 +23,9 @@ public class UserManager {
         return userDAO.findAll();
     }
 
+    public List<User> getUserByUsernameAndPassword(String username, String password) {
+        return userDAO.findByProperty2("username", username, "password", password);
+    }
     public static void main(String[] args) {
         UserManager userManager = new UserManager();
 //        System.out.println(userManager.addUser(new User("hello","password")));

@@ -3,6 +3,7 @@ package com.beike.controller;
 /**
  * Created by huahui.yang on 3/21/15.
  */
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -38,8 +39,8 @@ public class UserController {
             HttpServletResponse response,
             @RequestParam(value = "username", required = true) String username,
             @RequestParam(value = "password", required = true) String password
-    ){
-        logger.info("username:" +username+ "password:" + password);
+    ) {
+        logger.info("username:" + username + "password:" + password);
         userManager.addUser(new User(username, password));
         String jsonResult = "{result:true, message:add user success}";
         try {
@@ -59,8 +60,34 @@ public class UserController {
 
         String jsonResult = "";
         List<User> users = userManager.getAllUsers();
-        for(User at:users) {
-            jsonResult += ("{" + at.getUsername()+":"+at.getPassword()+"}");
+        for (User at : users) {
+            jsonResult += ("{" + at.getUsername() + ":" + at.getPassword() + "}");
+        }
+
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            response.getWriter().print(jsonResult);
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+
+    }
+
+    @RequestMapping(value = "/login")
+    public void methodUserLogin(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            @RequestParam(value = "username", required = false) String username,
+            @RequestParam(value = "password", required = false) String password) {
+        String jsonResult = "";
+        logger.info("login request: username=" + username + "password=" + password);
+
+        List<User> users = userManager.getUserByUsernameAndPassword(username, password);
+        if(users!=null && users.size() > 0) {
+            jsonResult = "login success";
+            logger.info("user info:" + users.get(0));
+        } else {
+            jsonResult = "login failed";
         }
 
         try {
