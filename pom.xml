@@ -129,9 +129,10 @@
                 </exclusion>
                 <exclusion>
                     <groupId>org.springframework</groupId>
-                    <artifactId>spring-context</artifactId>
+                    <artifactId>spring-test</artifactId>
                 </exclusion>
             </exclusions>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
