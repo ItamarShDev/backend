@@ -2,6 +2,7 @@ package com.beike.controller;
 
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
+import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import org.apache.log4j.Logger;
@@ -24,8 +25,8 @@ public class PicController {
     private static String ACCESS_KEY = "2M7GJDQg1q-9t3ainZtuZ_IcZIT258vhI_IiwQzY";
     private static String SECRET_KEY = "EtwCu1HBm-0o1HzQ3QvTB8ObLRNLk-CZ1KQkAUzw";
     private static String bucketName = "picbeike";
-//    private Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
-//    private BucketManager bucketManager = new BucketManager(auth);
+    private Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
+    private BucketManager bucketManager = new BucketManager(auth);
 
 
     @RequestMapping(value = "/upload")
@@ -37,19 +38,23 @@ public class PicController {
 
         logger.info("picurl: " + picurl);
 
-        UploadManager uploadManager = new UploadManager();
-        Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
-        String token = auth.uploadToken(bucketName);
-
-        Response r = null;
+//        UploadManager uploadManager = new UploadManager();
+//        Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
+//        String token = auth.uploadToken(bucketName);
         try {
-            r = uploadManager.put("hello world".getBytes(), "yourkey", token);
-
+            bucketManager.fetch(picurl, bucketName, "key"+picurl);
         } catch (QiniuException e) {
             e.printStackTrace();
         }
-
-        logger.info("response:" + r);
+//        Response r = null;
+//        try {
+//            r = uploadManager.put("hello world".getBytes(), "yourkey", token);
+//
+//        } catch (QiniuException e) {
+//            e.printStackTrace();
+//        }
+//
+//        logger.info("response:" + r);
 
         jsonResult = "{result:true, message:upload success}";
 
