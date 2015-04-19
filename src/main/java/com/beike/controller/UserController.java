@@ -137,4 +137,22 @@ public class UserController {
         }
 
     }
+
+    @RequestMapping(value = "/logout")
+    public void methodUserLogout(
+            HttpServletRequest request,
+            HttpServletResponse response) {
+        String jsonResult = "";
+        HttpSession session = request.getSession();
+        request.getSession().removeAttribute("username");
+        jsonResult = "{result:true, message:user logout}";
+
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            response.getWriter().print(jsonResult);
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+
+    }
 }
